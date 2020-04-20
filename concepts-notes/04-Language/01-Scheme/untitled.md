@@ -1,6 +1,10 @@
+<!-- GFM-TOC -->
+
 - [Basic Operation](#basic-operation)
   * [number, string, boolean, list](#number--string--boolean--list)
   * [variable, function](#variable--function)
+
+<!-- GFM-TOC -->
 
 ## Basic Operation
 ```
