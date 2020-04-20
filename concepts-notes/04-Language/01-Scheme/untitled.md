@@ -1,5 +1,4 @@
 <!-- GFM-TOC -->
-
 - [Basic Operation](#basic-operation)
   * [number, string, boolean, list](#number--string--boolean--list)
   * [variable, function](#variable--function)
@@ -26,7 +25,7 @@
 1234567890123456789011234567890
 ```
 
-### number, string, boolean, list 
+## number, string, boolean, list 
 ```
 ;----------------------------------------------
 ; atoms: number, string, boolean, list 
