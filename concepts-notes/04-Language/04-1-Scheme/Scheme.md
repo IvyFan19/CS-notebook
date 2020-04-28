@@ -8,6 +8,7 @@ references:
 2. [online scheme 2](https://paiza.io/projects/uL3gz5Yy2GxBEMQTRsznTA?language=scheme)
 3. [learn scheme in 15 min](https://web-artanis.com/scheme.html)
 4. [The Racket Reference](https://docs.racket-lang.org/reference/index.html)
+5. [Scheme tutorial](http://www.shido.info/lisp/idx_scm_e.html)
 
 # Basic Operation
 ```
@@ -330,7 +331,7 @@ Error: =: number required,
 ## Iteration
 ```
 (for-each display '(1 2 3 4 5))
-```
+
 (do ((k 1 (+ k 1)))             ; init
     ((> k 5) (display " "))     ; terminate statement
     (display k) (display " "))  ; body
@@ -356,7 +357,6 @@ Error: =: number required,
 
 # Code Practice
 ## convert decimal to binary
-```
 # PYTHON: Function to print binary number for the input decimal using recursion  
 def decimalToBinary(n):  
     if(n > 1):  

@@ -45,10 +45,8 @@ console.log(object);
 if(l == 5){
     console.log('l is 5');
 }else{
-    console.log('l is not 5??')
+    console.log('l is not 5')
 }
-
-var l = 5;
 ```
 
 ## Data types
@@ -272,19 +270,194 @@ let showID2 = person.getID.call(p2, "male");  // call, input " "
 console.log(showID1);
 console.log(showID2);
 ```
+# Objects
 
-
-
-
-
-
+## Function sign to variable
 
 ```javascript
+let Person = function(name, age, ssn){
+    this.name = name;
+    this.age = age;
+    this.ssn = ssn;
+    this.printInfo = function(){
+        console.log(
+            "Name: " + this.name + " Age: " + this.age + " SSN: " + this.ssn);
+    }
+};
 
+let t = new Person("Coco", 10, 123);
+let r = new Person("Rick", 66, 234);
+console.log(t);
+console.log(r);
+/**
+ * Person { name: 'Coco', age: 10, ssn: 123, printInfo: [Function] }
+ * Person { name: 'Rick', age: 66, ssn: 234, printInfo: [Function] }
+ */
 ```
+## Object sign to variable
 ```javascript
+let person = {
+    name: "tony",
+    age: 18,
+    ssn: 123456,
+    printInfo: function(){
+        console.log("Name: " + this.name + " Age: " + this.age + " SSN: " + this.ssn);
+    }
+};
+
+// Access to object way
+console.log(person);
+/**
+{
+  name: 'tony',
+  age: 18,
+  ssn: 123456,
+  printInfo: [Function: printInfo]
+}
+ */
+console.log(person.ssn); // dot notation
+
+let ssnProp = 'ssn';
+console.log(person[ssnProp]); // bracket notation
+/**
+ * 123456
+ */
+
+person.printInfo();
+/**
+ * Name: tony Age: 18 SSN: 123456
+ */
 
 ```
+
+## Getter
+
+```javascript
+ let Person = function(name, age, ssn){
+    this.name = name;
+    this.age = age;
+    this.ssn = ssn;
+    this.printInfo = function(){
+        console.log(
+            "Name: " + this.name + " Age: " + this.age + " SSN: " + this.ssn);
+    }
+};
+
+let t = new Person("Coco", 10, 123);
+let r = new Person("Rick", 66, 234);
+
+ Person.prototype.getSSN= function(){
+     return this.ssn;
+    }
+ console.log(t.getSSN()); // 123
+```
+
+## TraditionalTr
+
+```javascript
+Person.prototype.shoolYear = 2020; // add attributes
+ Person.prototype.getSSN= function(){
+    console.log("return ssn");
+     return this.ssn;
+    }
+ console.log(person.getSSN());
+
+
+ let Student = function(name, age, ssn, school, major){
+     Person.call(this, name, age, ssn);
+     this.school = school;
+     this.major = major;
+
+ };
+
+ Student.prototype = Object.create(Person.prototype);
+ Student.prototype.constructor = Student;
+
+ let Employee = function(name, age, ssn, title, dept){
+    Person.call(this, name, age, ssn);
+    this.title = title;
+    this.dept = dept;
+ };
+ Employee.prototype = Object.create(Person.prototype);
+ Employee.prototype.constructor = Employee;
+
+ let s = new Student("peter", 30, 9999, "SFSU", "CS" );
+ console.log(s);
+ let e = new Employee("James", 60, 12343, "Lecturer", "Art");
+ console.log(e);
+ console.log(e.hasOwnProperty("name")); // true
+ console.log(e.hasOwnProperty("height")); // false
+ console.log(e.shoolYear);
+ console.log(e.hasOwnProperty("shoolYear")); // false
+
+//  Student {
+//     name: 'peter',
+//     age: 30,
+//     ssn: 9999,
+//     printInfo: [Function],
+//     school: 'SFSU',
+//     major: 'CS'
+//   }
+//   Employee {
+//     name: 'James',
+//     age: 60,
+//     ssn: 12343,
+//     printInfo: [Function],
+//     title: 'Lecturer',
+//     dept: 'Art'
+//   }
+```
+
+## Classic Class
+
+```javascript
+ class Person {
+     constructor(name, age, ssn) {
+         this.name = name;
+         this.age = age;
+         this.ssn = ssn;
+         this.printInfo = function(){
+             console.log(
+                "Name: " + this.name + " Age: " + this.age + " SSN: " + this.ssn
+             );
+         }
+     }
+     getSSN(){
+         this.test = 5
+         return this.ssn + test;
+     };
+     getName(){
+         return this.name;
+     };
+ }
+
+let peter = new Person("peter", 18, "4rfv");
+console.log(peter);
+
+
+class Student extends Person{
+    constructor(name, age, ssn) {
+        supper(this, name, age, ssn);
+        this.school = school;
+        this.major = major;
+    }
+    getSSN(){
+        return this.ssn;
+    };
+    getName(){
+        return this.name;
+    }
+}
+
+```
+
+
+
+
+
+
+
+
 ```javascript
 
 ```
