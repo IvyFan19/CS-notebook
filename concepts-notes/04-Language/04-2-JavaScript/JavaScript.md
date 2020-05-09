@@ -1,32 +1,11 @@
-
-- [2. Conditional Function](#2-conditional-function)
-  - [2.1. If](#21-if)
-  - [2.2. Switch](#22-switch)
-  - [2.3. Try...catch](#23-trycatch)
-  - [2.4. Loops and iterators](#24-loops-and-iterators)
-  - [2.5. Map](#25-map)
-  - [2.6. Reduce](#26-reduce)
-  - [2.7. Filter](#27-filter)
-  - [2.8. Find](#28-find)
-  - [2.9. Slice](#29-slice)
-- [3. Function](#3-function)
-  - [3.1. Function expression](#31-function-expression)
-  - [3.2. Nested function](#32-nested-function)
-  - [3.3. Call](#33-call)
-- [4. Objects](#4-objects)
-  - [4.1. Function sign to variable](#41-function-sign-to-variable)
-  - [4.2. Object sign to variable](#42-object-sign-to-variable)
-  - [4.3. Getter](#43-getter)
-  - [4.4. Traditional](#44-traditional)
-  - [4.5. Classic Class](#45-classic-class)
-- [5. Async and Sync code](#5-async-and-sync-code)
-  - [5.1. Sync code](#51-sync-code)
-  - [5.2. Promise](#52-promise)
-  - [5.3. async wait](#53-async-wait)
-
-
 <!-- TOC -->
 
+- [1. Basic](#1-basic)
+  - [1.1. Comments](#11-comments)
+  - [1.2. Three types of variable](#12-three-types-of-variable)
+  - [1.3. Data types](#13-data-types)
+    - [1.3.1. Datatype conversion](#131-datatype-conversion)
+  - [1.4. False](#14-false)
 - [2. Conditional Function](#2-conditional-function)
   - [2.1. If](#21-if)
   - [2.2. Switch](#22-switch)
@@ -53,6 +32,7 @@
   - [5.3. async wait](#53-async-wait)
 
 <!-- /TOC -->
+# 1. Basic
 ## 1.1. Comments
 ```javascript
 /*

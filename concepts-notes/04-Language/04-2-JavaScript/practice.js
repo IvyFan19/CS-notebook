@@ -534,10 +534,35 @@ let l = [1, 2, 3, 4, 5, 7, 8, 9];
 
 
 
-  function leftOpera(x){
-      function rightOpera(y){
-          return x / y;
-      }
-      return rightOpera;
+//   function leftOpera(x){
+//       function rightOpera(y){
+//           return x / y;
+//       }
+//       return rightOpera;
+//   }
+//   console.log(leftOpera(1)(3))
+
+
+
+  function sum(a, b) {
+      return a / b
   }
-  console.log(leftOpera(1)(3))
+
+  console.log(sum(3,5));
+
+  let sum2 = (a, b) => a + b;
+  console.log(sum2(1,2));
+
+  class Person {
+      constructor(name) {
+          this.name = name
+      }
+
+    PrintNameArrow() {
+        console.log('arrow: ' + this.name)
+    }
+
+  }
+
+  let person = new Person('bob')
+  person.PrintNameArrow()
