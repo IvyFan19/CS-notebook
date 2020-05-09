@@ -51,8 +51,8 @@
 //        return 'finally return';       // test function will return this value
 //    }
 // };
-//
-//console.log(test());
+
+// console.log(test());
 
 
 
@@ -93,10 +93,21 @@
 //     console.log(arr);
 // });
 
-// let obj = {name:"ivy", age:"5"};
-// for(let v in obj){
-//     console.log(v);
+// var obj = [10,20];
+// for(let key in obj){
+//     console.log(key);
 // }
+// // -> 0
+// // -> 1
+
+
+// var obj2 = [10,20];
+// for(let value of obj2){
+//     console.log(value);
+// }
+
+// -> 10
+// -> 20
 
 // // let myres = obj.forEach((i) => {
 // //     console.log(i);
@@ -113,14 +124,14 @@
 // console.log(mysqr);
 
 // object -> html
-let items = [
-    {name: "user1",
-    image: "dog.png",
-    bio: "bark"},
+// let items = [
+//     {name: "user1",
+//     image: "dog.png",
+//     bio: "bark"},
 
-    {name: "user2",
-    image: "cat.png",
-    bio: "miao"}]
+//     {name: "user2",
+//     image: "cat.png",
+//     bio: "miao"}]
 
 // let htmlArray = items.map((user) => {
 //     return `<h1>${user.name}</h1><img src="${user.image}" /><p>${user.bio}</p>` // tab key
@@ -340,41 +351,193 @@ let l = [1, 2, 3, 4, 5, 7, 8, 9];
 
 
 
- // Class
- class Person {
-     constructor(name, age, ssn) {
-         this.name = name;
-         this.age = age;
-         this.ssn = ssn;
-         this.printInfo = function(){
-             console.log(
-                "Name: " + this.name + " Age: " + this.age + " SSN: " + this.ssn
-             );
-         }
-     }
-     getSSN(){
-         this.test = 5
-         return this.ssn + test;
-     };
-     getName(){
-         return this.name;
-     };
- }
+//  // Class
+//  class Person {
+//      constructor(name, age, ssn) {
+//          this.name = name;
+//          this.age = age;
+//          this.ssn = ssn;
+//          this.printInfo = function(){
+//              console.log(
+//                 "Name: " + this.name + " Age: " + this.age + " SSN: " + this.ssn
+//              );
+//          }
+//      }
+//      getSSN(){
+//          this.test = 5
+//          return this.ssn + test;
+//      };
+//      getName(){
+//          return this.name;
+//      };
+//  }
 
-let peter = new Person("peter", 18, "4rfv");
-console.log(peter);
+// let peter = new Person("peter", 18, "4rfv");
+// console.log(peter);
 
 
-class Student extends Person{
-    constructor(name, age, ssn) {
-        supper(this, name, age, ssn);
-        this.school = school;
-        this.major = major;
-    }
-    getSSN(){
-        return this.ssn;
-    };
-    getName(){
-        return this.name;
-    }
-}
+// class Student extends Person{
+//     constructor(name, age, ssn) {
+//         supper(this, name, age, ssn);
+//         this.school = school;
+//         this.major = major;
+//     }
+//     getSSN(){
+//         return this.ssn;
+//     };
+//     getName(){
+//         return this.name;
+//     }
+// }
+
+// //  Sync code, lock and wait for other code finished
+// function doWork(){
+//     console.log('i am working');
+// }
+
+// function doStep(){
+//     doWork();
+//     console.log('done!');
+// }
+
+// console.log('starting to do work');
+// doStep();
+
+
+
+// function anotherFunction(){
+//     console.log('another function');
+//     console.log(result); // error
+// }
+
+// function timer(){
+
+//     console.log('Before setTimeout is called');
+//     setTimeout(() =>{
+//         console.log("Timeout has expired");
+//         var result = 6;
+//     }, 15000); // print Timeout has expired, then wait 15s
+
+//     console.log("After setTimeout is called"); // during the 15s, this line will run
+//     console.log(result); // -> undefined
+//     anotherFunction();
+// }
+// timer();
+// console.log(result); 
+
+
+
+// function foo() {
+//   var x = 1;  
+//   function bar() {
+//     var y = 2;
+//     console.log(x); // 1 (function `bar` closes over `x`)
+//     console.log(y); // 2 (`y` is in scope)
+//   }
+//   bar();
+//   console.log(x); // 1 (`x` is in scope)
+//   //console.log(y); // error
+// }
+
+// foo();
+
+
+// let randomPromise = (data) => new Promise((resolve, reject) => {
+//     if(data % 2 == 0){
+//         resolve(data + 'number is even');
+//     }else{
+//         reject(data + 'this is not what i want!')
+//     }
+// });
+
+// randomPromise(56)
+//     .then((data) => {
+//         console.log("the first then");
+//         console.log(data);
+//         return randomPromise(58);
+//     })
+//     .then((data) => {
+//         console.log("the sencond then");
+//         console.log(data);
+//         return randomPromise(59);
+//     })
+
+//     .then((ans3) => {
+//         console.log(ans3);
+
+//     })
+//     .catch((e) => {
+//         console.log("Error: " + e);
+//     })
+
+
+// let pa = Promise.all([randomPromise(56), randomPromise(58), randomPromise(60)])
+//     .then((data) => {
+//         data.forEach((element) => console.log(element)); 
+//     })
+//     .catch((e) => {
+//         console.log(e);
+//     });
+
+    // 56number is even
+    // 58number is even
+    // 60number is even
+
+
+
+// async function myfunction() {
+//     try{
+//         let data = await randomPromise(56);
+//         console.log(data);
+//         data = await randomPromise(58);
+//         console.log(data);
+//         data = await randomPromise(60);
+//         console.log(data);
+//         data = await randomPromise(61);
+//     }catch(e){
+//         console.log(e);
+//     }
+// }
+
+// myfunction();
+
+// 56number is even
+// 58number is even
+// 60number is even
+// 61this is not what i want!
+
+
+// function squarlist(list) {
+//     function square(x){
+//         return x*x;
+//     }
+
+//     for (var i = 0; i < list.length; i++){
+//         list[i] =  square(list[i]);
+//     }
+//     return list;
+// }
+
+// console.log(squarlist([1,2,4,5,6]));
+// // [ 1, 4, 16, 25, 36 ]
+
+// function makeFunc() {
+//     var name = 'Mozilla';
+//     function displayName() {
+//       alert(name);
+//     }
+//     return displayName;
+//   }
+  
+//   var myFunc = makeFunc();
+//   myFunc();
+
+
+
+  function leftOpera(x){
+      function rightOpera(y){
+          return x / y;
+      }
+      return rightOpera;
+  }
+  console.log(leftOpera(1)(3))

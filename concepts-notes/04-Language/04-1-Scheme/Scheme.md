@@ -30,7 +30,7 @@ references:
 1234567890123456789011234567890
 ```
 
-## number, string, boolean, list
+## number, string, boolean
 ```
 ;----------------------------------------------
 ; atoms: number, string, boolean, list, pairs
@@ -75,7 +75,68 @@ Variable ; not defined symbol
    (cdr (cons 1 2))
 => 2 
 ```
-## variable, function
+
+## char
+Characters are objects that represent printed characters, such as letters and digits.
+
+```
+#\a                     ; lowercase letter
+#\A                     ; uppercase letter
+#\(                     ; left parenthesis
+#\space                 ; the space character
+#\newline               ; the newline character
+
+> (char? #\a)
+#true
+> (char? #\space)
+#true
+
+```
+
+## list: append, sum
+```
+; (1) sum of list
+(define (sumlist lst)
+  (if(null? lst)
+     0
+  (+ (car lst) (sumlist (cdr lst)))))
+
+(sumlist '(1 2 3 4))
+; => 10
+
+
+(append (list 4 3 2 1) '(5))
+; => (4 3 2 1 5)
+
+   (list 'a (+ 3 4) 'c) 
+=> (a 7 c)
+
+```
+## function return value
+
+```
+;;(1) list expression
+   (+ 1 2 3)
+=> 6
+
+;;(2) fucntion defination
+   (define (square x) (* x x))
+   (square 10)]
+=> 100
+
+;;(3) anonymous function
+   ((lambda(n) (* n n)) 5)
+=> 25
+
+;;(4)two variable function 
+;;; (define (func_name v1 v2) (do))
+   (define (tri a b)(sqrt(+ (* a a)(* b b))))  ; sqrt(3*3+4*4)
+   (tri 3 4)
+=> 5
+```
+
+## variable
+
 ```
 ;----------------------------------------------
 ; define: define variables and functions
@@ -124,8 +185,9 @@ define x 123)    ; x := 123
 ..     (string-append "hello " name)))
    (hello "ivy")
 => "hello ivy"
-
 ```
+
+
 ## set!, define, let
 ```
 ;----------------------------------------------
@@ -226,6 +288,12 @@ I'm Guile. Nice to meet you!
    (map add1 '(1 2 3))          ; => '(2 3 4)
    (map + '(1 2 3) '(10 20 30))
 => (11 22 33)   
+
+; from '() to expression we can compute 
+> (eval '(+ 1 2))
+3						
+
+
 ```
 ## equal
 ```
@@ -288,6 +356,11 @@ Error: =: number required,
 
 ## Cond
 ```
+;(cond (<cond_1> <return_1>)
+; 		(<cond_2> <return_2)>)
+; 		(else <do>)); 
+
+
 (define x 3)
 (define y 4)
 (cond ((> x y) 'greater)
@@ -379,3 +452,157 @@ def decimalToBinary(n):
 
 (loop 9)
 ```
+
+# Practice
+
+## 1. Is the list of number?
+```
+(define is-list-number?
+  (lambda (lst)
+    (if (null? lst)
+        #T
+          (if (number? (car lst))
+            (is-list-number? (cdr lst))
+            #F) ; the capical is not number
+          )))
+
+(define l (list 1 2 3 4))
+(define m (list 1 2 +))
+
+(is-list-number? l)
+; => #t
+(is-list-number? m)
+; => #f
+```
+
+## 2. Temperature conversion: Farenheit <=> Celsius
+
+```
+(define FtoC
+  (lambda(F)
+    (/ (* 5 (- F 32)) 9)))
+
+(define CtoF
+  (lambda(C)
+    (+ 32 (/ (* 9 C) 5))))
+```
+
+## 3. Make recognizers: alphabetic, numeric, whitespace
+
+```
+ ; alphabetic: a-z or A-Z
+(define is-alphabetic?
+  (lambda(x)
+    (and (char? x)
+      (or (and (char>=? x #\a) (char<=? x #\z))
+          (and (char>=? x #\A) (char<=? x #\Z))))))
+
+;    (is-alphabetic? #\a)
+; => #t
+;    (is-alphabetic? #\()
+; => #f
+    
+; numberic: 0-9
+(define is-numberic?
+  (lambda(x)
+    (and (char? x)
+         (and (char>=? x #\0) (char<=? x #\9)))))
+   
+;    (is-numberic? #\a)
+; => #f
+;    (is-numberic? #\9)
+; => #t
+
+; whitespace: #\space, \#tab, #\newline, #\page, #\return
+(define is-space?
+  (lambda(x)
+    (case x
+      ((#\space \#tab #\newline #\page #\return)
+       #t)
+      (else
+       #f))))
+
+; upercase: A-Z
+(define is-uppercase?
+  (lambda(x)
+    (and (char? x)
+         (and (char>=? x #\A) (char<=? x #\Z)))))
+         
+;    (is-uppercase? #\a)
+; => #f
+```
+
+## 4. Check type
+
+```
+(define get-Type
+  (lambda (x)
+    (cond ((number? x) "Number")
+          ((pair? x) "Pair")
+          ((string? x) "String")
+          ((list? x) "List")))) 
+```
+
+## 4.Find the largest number in a list
+```
+(define list-max
+  (lambda(lst)
+    (cond ((null? (cdr lst)) (car lst))  ;cond((if lst is null) (return car))
+          ((> (car lst) (list-max(cdr lst))) (car lst))     
+          (else (list-max(cdr lst))))))
+
+; (list-max '(1 2 3 4 2 9 0))
+; => 9
+```
+
+## 5. Rotate the three element list:(a b c) -> (c, a, b) 
+```
+; (car x)    ==(first x)
+; (cadr x)   ==(second x) ==(car (cdr x))
+; (caddr x)  ==(third x)  ==(car (cdr (cdr x)))
+; (cadddr x) ==(fourth x) ==(car (cdr (cdr (cdr x))))
+
+(define rotate_three
+  (lambda(lst)
+    (if (= 3 (length lst))
+        (list (caddr lst) (car lst) (cadr lst))
+        (else
+         (display "the lengh of the list is not three! Try again")))))
+
+(rotate_three '(1 2 3))
+; => (3 1 2)
+(rotate_three '(1 2 3 4))
+; => the lengh of the list is not three! Try again
+```
+
+## 6. Remove the last element of list
+```
+(reverse '(9 0 6 8))
+; => (8 6 0 9)
+
+(define remove_last_ele
+  (lambda (lst)
+    (reverse (cdr (reverse lst)))))
+
+(remove_last_ele '(8 9 0 1 2))
+; => (8 9 0 1)
+```
+
+
+## 7. Make a list that consist of first and last element
+
+ ```
+(define first_and_last
+  (lambda (lst)
+    (list (car lst) (car (reverse (cdr lst))))))
+
+(first_and_last '(1 2 3 54 66))
+; => (1 66)
+```
+
+## 8. Read a number then compute its squre and root
+```
+(define square-and-root
+  (lambda()
+    (read "Enter the number: ")))
+``
