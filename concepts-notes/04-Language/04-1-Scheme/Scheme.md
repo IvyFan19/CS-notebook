@@ -1,6 +1,38 @@
-[toc]
 
----
+<!-- TOC -->
+
+- [Basic Operation](#basic-operation)
+  - [number, string, boolean](#number-string-boolean)
+  - [char](#char)
+  - [Vector](#vector)
+  - [list: append, sum](#list-append-sum)
+  - [function return value](#function-return-value)
+  - [variable](#variable)
+  - [set!, define, let](#set-define-let)
+  - [reading](#reading)
+  - [default function](#default-function)
+  - [equal](#equal)
+- [Control Flow](#control-flow)
+  - [Begin](#begin)
+  - [If](#if)
+  - [Cond](#cond)
+  - [Case](#case)
+  - [Loop](#loop)
+  - [Iteration](#iteration)
+- [Practice](#practice)
+  - [1. Is the list of number?](#1-is-the-list-of-number)
+  - [2. Temperature conversion: Farenheit <=> Celsius](#2-temperature-conversion-farenheit--celsius)
+  - [3. Make recognizers: alphabetic, numeric, whitespace](#3-make-recognizers-alphabetic-numeric-whitespace)
+  - [4. Check type](#4-check-type)
+  - [4.Find the largest number in a list](#4find-the-largest-number-in-a-list)
+  - [5. Rotate the three element list:(a b c) -> (c, a, b)](#5-rotate-the-three-element-lista-b-c---c-a-b)
+  - [6. Remove the last element of list](#6-remove-the-last-element-of-list)
+  - [7. Make a list that consist of first and last element](#7-make-a-list-that-consist-of-first-and-last-element)
+  - [8. Write a number then compute its squre and root](#8-write-a-number-then-compute-its-squre-and-root)
+  - [9.Quadratic equation solver](#9quadratic-equation-solver)
+  - [10. Home-made sqrt(x)](#10-home-made-sqrtx)
+
+<!-- /TOC -->
 
 references:
 
@@ -92,7 +124,16 @@ Characters are objects that represent printed characters, such as letters and di
 #true
 
 ```
-
+## Vector
+A vector is a fixed-length array with constant-time access and update of the vector slots, which are numbered from 0 to one less than the number of slots in the vector.
+```
+(define v (make-vector 5))
+(vector-set! v 0 'shoe)
+(vector-set! v 2 '(savoy truffle))
+(vector-ref v 3)
+; BREAD
+(vector-length v)
+```
 ## list: append, sum
 ```
 ; (1) sum of list
@@ -600,9 +641,49 @@ def decimalToBinary(n):
 ; => (1 66)
 ```
 
-## 8. Read a number then compute its squre and root
+## 8. Write a number then compute its squre and root
 ```
-(define square-and-root
+(define sqare-and-root
   (lambda()
-    (read "Enter the number: ")))
-``
+    (write "Enter your number:")
+	(define n (read))
+	(display "n=")
+	(print n)
+	(if (eqv? n 'stop)
+        (display "bye")
+		(begin
+		(display "the square is: ")
+        (print (* n n))
+		(display "the root is: ")
+		(print (sqrt n))
+		))))
+
+; "Enter your number:" 4
+; n=4
+; the square is: 16
+; the root is: 2
+```
+
+
+## 9.Quadratic equation solver
+```
+(define quadratic_solver
+  (lambda(a b c)
+    (define denominator (* 2 a))
+    (define numerator1 (+ (* -1 b) (sqrt (- (* b b) (* 4 a c)))))
+	(define numerator2 (- (* -1 b) (sqrt (- (* b b) (* 4 a c)))))
+	(display "x1 = ")
+    (print (/ numerator1 denominator))
+	(display "x2 = ")
+	(print (/ numerator2 denominator))))
+
+(quadratic_solver 1 -1 0)
+(quadratic_solver 1 4 3)
+; x1 = 1
+; x2 = 0
+; x1 = -1
+; x2 = -3
+```
+## 10. Home-made sqrt(x)
+
+

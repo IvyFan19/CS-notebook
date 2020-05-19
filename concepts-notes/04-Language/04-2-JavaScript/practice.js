@@ -544,25 +544,62 @@ let l = [1, 2, 3, 4, 5, 7, 8, 9];
 
 
 
-  function sum(a, b) {
-      return a / b
-  }
+//   function sum(a, b) {
+//       return a / b
+//   }
 
-  console.log(sum(3,5));
+//   console.log(sum(3,5));
 
-  let sum2 = (a, b) => a + b;
-  console.log(sum2(1,2));
+//   let sum2 = (a, b) => a + b;
+//   console.log(sum2(1,2));
 
-  class Person {
-      constructor(name) {
-          this.name = name
-      }
+//   class Person {
+//       constructor(name) {
+//           this.name = name
+//       }
 
-    PrintNameArrow() {
-        console.log('arrow: ' + this.name)
-    }
+//     PrintNameArrow() {
+//         return console.log('arrow: ' + this.name)
+//     }
 
-  }
+//   }
 
-  let person = new Person('bob')
-  person.PrintNameArrow()
+//   let person = new Person('bob')
+//   person.PrintNameArrow()
+
+// function myFunct(){
+//     var x = 9;
+// }
+
+// console.log(x);
+
+
+// if(1==1){
+//     let x = 6;
+// }
+// console.log(x);
+
+// let x = {
+//     name:"tony",
+//     age: 45
+// }
+// console.log(x.age);
+
+// const x =5;
+// x = 45;
+// console.log(x);
+
+
+
+let x = 5;
+switch(x){
+    case 1:
+        console.log(1);
+        break;
+    case 5:
+        console.log(2);
+    case 6:
+        console.log(6);
+    default:
+        console.log(5);
+}

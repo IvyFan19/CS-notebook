@@ -1,15 +1,87 @@
-[toc]
+<!-- TOC -->
+
+- [Get Started with Ruby](#get-started-with-ruby)
+  - [Ruby is OOP](#ruby-is-oop)
+  - [What is object?](#what-is-object)
+- [Baisc object types](#baisc-object-types)
+  - [Variable](#variable)
+  - [Integer](#integer)
+  - [String](#string)
+  - [Array](#array)
+  - [Hash](#hash)
+  - [Symbols](#symbols)
+  - [Ranges](#ranges)
+  - [Set](#set)
+  - [Scalar argument](#scalar-argument)
+  - [Puts, p, print](#puts-p-print)
+- [Control structures](#control-structures)
+  - [Conditional](#conditional)
+    - [If...else](#ifelse)
+    - [Unless = if !](#unless--if)
+    - [Case](#case)
+  - [Iterators](#iterators)
+    - [Times](#times)
+    - [Upto, downto](#upto-downto)
+    - [each](#each)
+  - [Loop](#loop)
+    - [while](#while)
+    - [until](#until)
+    - [for](#for)
+    - [map](#map)
+    - [collect](#collect)
+    - [select](#select)
+    - [reject](#reject)
+- [Methods and Class](#methods-and-class)
+  - [return 2  value](#return-2-value)
+- [Class](#class)
+  - [Accessor(geter & setter)](#accessorgeter--setter)
+  - [Class varivable @@](#class-varivable)
+  - [Self](#self)
+  - [Public, Protected, Pricate methods](#public-protected-pricate-methods)
+- [Exercise](#exercise)
+  - [palindrome](#palindrome)
+  - [find largest number](#find-largest-number)
+  - [tail recursion](#tail-recursion)
+  - [Class Set(show, found, hasMember, isSet?)](#class-setshow-found-hasmember-isset)
+
+<!-- /TOC -->
 
 ---
+Refefence:
+1. [search mehtods and classes](https://ruby-doc.org/core-2.7.1/)
 
-references:
 
-```
-# Range
-# 1..5 : 1,2,3,4,5
-(1..5)
-(1...5)
+# Get Started with Ruby
+1. Interactive ruby shell in terminal: irb
+2. (terminal) ri String#upcase
+3. Ruby name convention: lowercase_lowercase
+4. Ruby is interpreted language, not compiled
+## Ruby is OOP
+Ruby is an object-oriented programming language
+- No "primitives"
+- Most everything is an object
 
+  
+## What is object?
+- Object can represent abstract ideas
+- Object have attributs
+- Objects are instance of class
+- Object have behaviors
+  
+
+# Baisc object types
+## Variable
+variable is referrence, not object
+
+|Variablel| Style|
+|:----:|:---------:|
+|Global| $variable|
+|Class| @@varibale|
+|Instance| @variable|
+|Lacal|varible|
+|Block|variable|
+
+```ruby
 # Variable are not declare, because Ruby uses dynamic typing
 bin = 0b1111_1111 # binary number from dec.class => 255
 oct = 0377        # => 255
@@ -24,44 +96,167 @@ bin + oct + hex == 3*dec
 # @@name = class variable (shared among all instances)
 # $name = global variable, for all program
 # CONST = named constant(star with uppercase)
+```
 
-# parallel assignment
+## Integer
+```ruby
+x = 10
+print x.class
+# Integer
 
-a, b, c = 1, 2, 3     # a = 1; b = 2; c = 3
-print("a = ", a, " b = ", b, " c = ", c, "\n")
-a, b, c = 1, 2        # a = 1; b = 2; c = nil
-print("a = ", a, " b = ", b, " c = ", c, "\n")  # a = 1 b = 2 c = 
-a, b = b, a           # swap, don't need to complete "temp" => a = 2 b = 1 c = 
-print("a = ", a, " b = ", b, " c = ", c, "\n")
+print 10.to_f
+# 10.0
+print 3.0.to_i
+# 3
+#
+.round
+.abs
+.floor
+.ceil
+```
 
-# Block expression
-# Block expression: begin and end
-# it returns a value
 
-# Control structure
-# ruby control strucure has nearly 30 mechanisms
-# picture
+## String
+```ruby
+# 1. join
+A = 'hello'
+B = 'world'
+puts A + ' ' + B
 
-# if-then
-# if <condition> then <Block1> else <Block2> end
-x = 1
-y = 1
-if x == y then 
-  puts "x equals y" 
-else
-  puts "x is not equal to y"
+# multiplication
+x = "Good" * 3
+puts x
+
+# 2. reverse
+y = x.reverse.capitalize
+puts y
+# Doogdoogdoog
+
+# 3. interpolation
+msg="I love you"
+puts "I just called to say: #{msg}."   #{} make expression into string
+# I just called to say: I love you.
+```
+
+## Array
+Array has a lot of methods: .uniq, .shuffle, .include(2), .delete('c')
+
+```ruby
+array = [1, 2, 3, 'a', 'b', 'c']
+puts array.reverse
+puts array.reverse! # it will save in the array
+
+# Intersection
+show([1,3,5,7]&[2,4,5,8])
+
+# Union of arrays
+show([1,2,5,7] | [2,4,6,8])
+#1257468
+
+# Concatenation of array
+show([1,3,5,7]+[2,4,6,8])
+# 13572468
+
+# Difference of array
+show([1,3,5,7]-[1,1,2,5,7])
+# 3
+
+# Repetition of array
+show(["Y","e","s"]*3)
+
+a = [1,2,3,4,5,6]
+puts a.include?(4)
+puts a.at(-1)
+puts a.delete(4)
+print a
+a.each{|i| print i," - "}
+
+# true
+# # 6
+# # 4
+# # [1, 2, 3, 5, 6]
+# # 1 - 2 - 3 - 5 - 6 - 
+
+# ponter and assignment
+a.dup
+a.clone
+
+```
+
+## Hash
+```ruby
+scores = {:low => 10, :high => 99, :avg=>50}
+scores = {low:10, high:10, avg:50}    # short and simple
+```
+## Symbols
+symbol like sting but has unique memory location
+```ruby
+irb(main):011:0> "test".object_id
+=> 70205301248600
+irb(main):012:0> "test".object_id
+=> 70205301266800
+irb(main):013:0> :test.object_id
+=> 374428
+irb(main):014:0> :test.object_id
+=> 374428
+```
+## Ranges
+```
+inclusive = 1..10
+puts inclusive.begin
+puts inclusive.end
+
+exclusive = 1...10
+```
+
+## Set
+```ruby
+require 'set'
+s1 = Set.new [1, 2]              # -> #<Set: {1, 2}>
+s2 = [1, 2].to_set                    # -> #<Set: {1, 2}>
+s1 == s2                              # -> true
+s1.add("foo")                         # -> #<Set: {1, 2, "foo"}>
+s1.merge([2, 6])                 # -> #<Set: {6, 1, 2, "foo"}>
+s1.subset? s2                         # -> false
+s2.subset? s1                         # -> true
+```
+
+## Scalar argument
+```ruby
+# return array
+def demo(*arg) # change to array
+  return arg
 end
+a = demo(1,2,3,4)
+puts a.class
+```
+
+## Puts, p, print
+```ruby
+a = [1, 2, 3, 4]
+a = a << 5 << 6
+#  p prints the the raw object that you pass to it.
+# This is because it uses .inspect to convert the object to a string rather than .to_s..
+p a
+
+# print also converts the argument you pass it into a string using .to_s and prints it to the command line.
+# But it does not add a newline character.
+print a, "\n"
+
+# Puts = Put string. Puts will also print the individual elements of an array with the a newline character after each.
+puts a
+# one
+# two
+# three
+# four
+# five
+```
+# Control structures
+## Conditional
+### If...else
+```ruby
+
 # basic relationship: ==, !=, >, <, <=, &&, ||, !
-
-# short ciruit evaluation
-# if a == false return a
-# else return b
-a && b
-
-# if a == true then return a 
-# else return b 
-a || b
-
 # If-elsif-else
 # if <condition1> then <B1> elsif <C2> <B2> .... end
 if x == 1 
@@ -71,42 +266,73 @@ elsif x == 2
 else
   "many"
 end
+```
+### Unless = if !
 
+```ruby
 # Unless
 # do <puts> unless x is qual to y
 # locially different with IF
 unless x == y
   puts "x is not equal to y"
-
-# return value
-# return the alas expression evaluated, this is one of concepts of functional programming
-
-
-
-# Case syntax
-year = 1915
-war = case year
-when 1914 .. 1918 then "WW1"
 end
-puts "the war was " + war
+```
 
+### Case
 
-
-leap = case
-  when year % 400 == 0 then true
-  when year % 100 == 0 then false
-
-# print year, "was a war", war puts
-
-# puts in string, #{ }, it will return expression fuction -> nil
-a = 2
-b = 3
-x = puts "abc#{a*b}def#{a**b}ghi" # x = nil, because assignment is a expression
+```ruby
+# Case syntax
+year = 2020
+case
+when year % 400 == 0
+  puts "400"
+when year % 100 == 0
+  puts "100"
+else
+  puts "don't know"
+end
 ```
 
 ## Iterators
-### while
+### Times
 
+```ruby
+5.times {
+  puts "Hello"
+}
+
+n = x = 2
+n.times{x=0.5*(x+n/x);puts x}
+# 1.5
+# 1.4166666666666665
+```
+### Upto, downto
+
+```ruby
+1.upto(5){
+  puts "Hello"
+}
+
+5.upto(1){
+  puts "Hello"
+}
+```
+### each
+```ruby
+### each
+a = [1,2,3]
+a.each do |com|
+  puts com
+end
+
+(V.S.) 
+a.length.times do |i|
+# 1
+# 2
+# 3
+```
+## Loop
+### while
 ```ruby
 # while <boolean expression> [do | :]
 #     <body>
@@ -233,41 +459,6 @@ end
 # 1 1 0
 # 1 1 1
 ```
-### upto, downto
-
-```ruby
-k = 1
-(k+1).upto(k+3){|k| puts k}
-# 2
-# 3
-# 4
-#
-```
-### times
-
-```ruby
-# <obj><iterator name>{|<var>|<loop body>}
-# obj.times{<block>} # repeates <block> <expression = n> time
-
-3.times{puts "Morning"}
-# Morning
-# Morning
-# Morning
-
-n = x = 2
-n.times{x=0.5*(x+n/x);puts x}
-# 1.5
-# 1.4166666666666665
-```
-### each
-```ruby
-### each
-a = [1,2,3]
-a.each{|com| puts com}
-# 1
-# 2
-# 3
-```
 
 ### map
 ```ruby
@@ -311,43 +502,181 @@ puts odds
 # 7
 # 9
 ```
+# Methods and Class
+## return 2  value 
+return 2 value will be an array
 
-0504
+``` ruby
+def return2(x, y)
+  return x+y, x*y
+end
 
+result = return2(7,2)
+puts "result is an #{result.class}"
+# result is an Array
+
+puts result
+# 9
+# 14
+
+p result
+# [9, 14]
+
+def qe(a, b, c)
+  x1 = (-b + Math::sqrt(b**2-4*a*c))/(2*a)
+  x2 = (-b - Math::sqrt(b**2-4*a*c))/(2*a)
+  return x1, x2
+end
+
+puts "Solving x**2 - 3x + 2 = 0"
+x1, x2 = qe(1, -3, 2)
+puts "x1 = #{x1}, x2 = #{x2}"
+```
+# Class
+
+An instance of a class always has access to its instance variables.
+
+## Accessor(geter & setter)
 ```ruby
-
-# loop do 
-#   <block>
-# end
-
-def mysqrt(x)
-  result =x
-  8.times{
-    result = 0.5 * (result + x /result)
-  }
-  return result
+class Box
+  def initialize(length, width, height)
+    @length = length
+    @width = width
+    @height = height
+  end
+  attr_accessor :length, :width, :height
 end
 
-# => :mysqrt
-#    mysqrt(2)
-# => 1.4142135623730095
-#    mysqrt(10)
-# => 3.162277660168379 mnbko90- 
-[o1`q po  a/≥zp#    mysqrt(16)
-# => 4.0
+mybox = Box.new(1,2,3)
+p mybox
 
-
-
-def demo(arg1="First", arg2="second")
-  arg1+arg2
+mybox.length = 10
+mybox.width = 20
+mybox.height = 30
+p mybox
+#<Box:0x00007fcb95063ef8 @length=1, @width=2, @height=3>
+#<Box:0x00007fcb95063ef8 @length=10, @width=20, @height=30>
+```
+## Class varivable @@
+```ruby
+class Box
+  @@boxcounter = 0
+  @@totalvolum = 0.0
+  
+  def initialize(x,y,z)
+    @length = x
+    @@boxcounter += 1
+  end
 end
-print demo, "\n"
-print demo("1", " 2")
+```
+## Self
+```ruby
+class Area
+  def self.box(a,b)
+    area = a * b
+  end
+  def self.triangle(a, h)
+    area = a * h /2
+  end
+end
 
-puts["a","b","c"].join(",")
+b = Area.box(2.0,3.0)
+puts b.class
 
+t= Area.triangle(2,3)
+puts t.class
 ```
 
+## Public, Protected, Pricate methods
 ```ruby
+protected
+  def
+private
+  def
+public
+  def
+```
 
+# Exercise
+## palindrome
+```ruby
+a = ["radar", "madam", "Madam","amanaplanacanalpanama","9876543210123456789"]
+
+def pal(str)        #return true or false
+  str == str.reverse
+end
+
+for w in a do
+  puts "Is {#w} palindrome: #{pal(w)}"
+end
+```
+## find largest number
+```ruby
+def max(first, *rest)
+  max=first
+  rest.each do |x|
+      if x > max
+        max = x
+      end 
+      return max
+  end
+end
+```
+
+## tail recursion
+```ruby
+def tail(a)
+  a[1..a.length-1]
+end
+
+def sum(a)
+  if a.length == 0
+    0
+  else
+    a[0] + sum(tail(a))
+  end
+end
+
+a = [1,2,3,4,6]
+p a, tail(a), sum(a)
+```
+## Class Set(show, found, hasMember, isSet?)
+```ruby
+class Set
+  def initialize(*a)
+    @a = a   # it will return to array
+  end
+
+  def show
+    print "{"
+    @a.length.times do |i|  # 0,1,2
+      print @a[i]
+      print ',' if i < @a.length-1
+    end
+    print "}"
+  end
+
+  def found(x)
+    @a.include?(x)
+  end
+
+  def hasMember(x)
+    if @a.include?(x)
+      print "YES!"
+    else
+      print "NO!"
+    end
+  end
+
+  def isSet?  # No same number. | intersection
+    (@a | @a).length == @a.length
+  end
+end
+
+
+s = Set.new(1,2,3) 
+puts s.show()        # {1,2,3}
+puts s.found(5)      # false
+puts s.hasMember(5)  # NO!
+puts s.isSet?        # true
 ```
