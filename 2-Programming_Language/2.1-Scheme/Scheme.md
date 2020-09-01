@@ -2,36 +2,33 @@
 <!-- TOC -->
 
 - [Basic Operation](#basic-operation)
-  - [number, string, boolean](#number-string-boolean)
-  - [char](#char)
-  - [Vector](#vector)
-  - [list: append, sum](#list-append-sum)
-  - [function return value](#function-return-value)
-  - [variable](#variable)
-  - [set!, define, let](#set-define-let)
-  - [reading](#reading)
-  - [default function](#default-function)
-  - [equal](#equal)
+    - [number, string, boolean](#number-string-boolean)
+    - [char](#char)
+    - [vector](#vector)
+    - [list: append, sum](#list-append-sum)
+    - [function return value](#function-return-value)
+    - [variable](#variable)
+    - [set!, define, let](#set-define-let)
+    - [reading](#reading)
+    - [default function](#default-function)
+    - [equal](#equal)
 - [Control Flow](#control-flow)
-  - [Begin](#begin)
-  - [If](#if)
-  - [Cond](#cond)
-  - [Case](#case)
-  - [Loop](#loop)
-  - [Iteration](#iteration)
+    - [Begin](#begin)
+    - [If](#if)
+    - [Cond](#cond)
+    - [Case](#case)
+    - [Loop](#loop)
+    - [Iteration](#iteration)
 - [Practice](#practice)
-  - [1. Is the list of number?](#1-is-the-list-of-number)
-  - [2. Temperature conversion: Farenheit <=> Celsius](#2-temperature-conversion-farenheit--celsius)
-  - [3. Make recognizers: alphabetic, numeric, whitespace](#3-make-recognizers-alphabetic-numeric-whitespace)
-  - [4. Check type](#4-check-type)
-  - [4.Find the largest number in a list](#4find-the-largest-number-in-a-list)
-  - [5. Rotate the three element list:(a b c) -> (c, a, b)](#5-rotate-the-three-element-lista-b-c---c-a-b)
-  - [6. Remove the last element of list](#6-remove-the-last-element-of-list)
-  - [7. Make a list that consist of first and last element](#7-make-a-list-that-consist-of-first-and-last-element)
-  - [8. Write a number then compute its squre and root](#8-write-a-number-then-compute-its-squre-and-root)
-  - [9.Quadratic equation solver](#9quadratic-equation-solver)
-  - [10. Home-made sqrt(x)](#10-home-made-sqrtx)
-
+    - [1. Is the list of number?](#1-is-the-list-of-number)
+    - [2. Temperature conversion: Farenheit <=> Celsius](#2-temperature-conversion-farenheit--celsius)
+    - [3. Make recognizers: alphabetic, numeric, whitespace](#3-make-recognizers-alphabetic-numeric-whitespace)
+    - [4. Check type](#4-check-type)
+    - [4.Find the largest number in a list](#4find-the-largest-number-in-a-list)
+    - [5. Rotate the three element list:(a b c) -> (c, a, b)](#5-rotate-the-three-element-lista-b-c---c-a-b)
+    - [6. Remove the last element of list](#6-remove-the-last-element-of-list)
+    - [7. Make a list that consist of first and last element](#7-make-a-list-that-consist-of-first-and-last-element)
+-----
 <!-- /TOC -->
 
 references:
@@ -42,8 +39,28 @@ references:
 4. [The Racket Reference](https://docs.racket-lang.org/reference/index.html)
 5. [Scheme tutorial](http://www.shido.info/lisp/idx_scm_e.html)
 
-# Basic Operation
+Sheme is the first-class object language. A function can be passed as an argument to other functions, can be returned by another function and can be assigned as a value to a variable.
+```scheme
+(define add2
+  (lambda (n)
+    (* n 2)))
+
+
+(define mycompose
+  (lambda (f g) 
+    (lambda (x)
+      (f ( g x)))))  ; return the funtions f(g(x)) 
+
+
+(define n '(1 2 3 4))
+(map add2 n)
+(define add4 (mycompose add2 add2)) ; add4(x) = add2(add2(x)) = x + 2 + 2
+
+
 ```
+
+# Basic Operation
+```scheme
 ;----------------------------------------------
 ; basic operation
 ;----------------------------------------------
@@ -63,7 +80,7 @@ references:
 ```
 
 ## number, string, boolean
-```
+```scheme
 ;----------------------------------------------
 ; atoms: number, string, boolean, list, pairs
 ;----------------------------------------------
@@ -71,6 +88,8 @@ references:
 123
 1.23e-100
 "this is string"
+  (string-append "123" "123")
+=> "123123"
 ""
 #b111                  ; binary => 7
 #o111                  ; octal => 73
@@ -111,7 +130,7 @@ Variable ; not defined symbol
 ## char
 Characters are objects that represent printed characters, such as letters and digits.
 
-```
+```scheme
 #\a                     ; lowercase letter
 #\A                     ; uppercase letter
 #\(                     ; left parenthesis
@@ -124,9 +143,9 @@ Characters are objects that represent printed characters, such as letters and di
 #true
 
 ```
-## Vector
+## vector
 A vector is a fixed-length array with constant-time access and update of the vector slots, which are numbered from 0 to one less than the number of slots in the vector.
-```
+```scheme
 (define v (make-vector 5))
 (vector-set! v 0 'shoe)
 (vector-set! v 2 '(savoy truffle))
@@ -135,7 +154,7 @@ A vector is a fixed-length array with constant-time access and update of the vec
 (vector-length v)
 ```
 ## list: append, sum
-```
+```scheme
 ; (1) sum of list
 (define (sumlist lst)
   (if(null? lst)
@@ -155,7 +174,7 @@ A vector is a fixed-length array with constant-time access and update of the vec
 ```
 ## function return value
 
-```
+```scheme
 ;;(1) list expression
    (+ 1 2 3)
 => 6
@@ -178,7 +197,7 @@ A vector is a fixed-length array with constant-time access and update of the vec
 
 ## variable
 
-```
+```scheme
 ;----------------------------------------------
 ; define: define variables and functions
 ;----------------------------------------------
@@ -230,7 +249,7 @@ define x 123)    ; x := 123
 
 
 ## set!, define, let
-```
+```scheme
 ;----------------------------------------------
 ; scheme: dynamic typing, set!, define operator
 ;----------------------------------------------   
@@ -264,7 +283,7 @@ define x 123)    ; x := 123
 ```
 
 ## reading
-```
+```scheme
 ;----------------------------------------------
 ; scheme: Reading list
 ;----------------------------------------------
@@ -291,7 +310,7 @@ define x 123)    ; x := 123
 display(car z) (display " ") (display (cdr z)))
 ```
 ## default function
-```
+```scheme
 ;----------------------------------------------
 ; default functions: abs, quotient, remainder, round, display, cons, append, map
 ;----------------------------------------------
@@ -337,7 +356,7 @@ I'm Guile. Nice to meet you!
 
 ```
 ## equal
-```
+```scheme
 ;----------------------------------------------
 ; =       ;numerical comparison
 ; eq?     ;equal beased pointer (role: rename function)
@@ -374,7 +393,7 @@ Error: =: number required,
 # Control Flow
 
 ## Begin
-```
+```scheme
 (define x 123)
 (begin (set! x 5) (+ 1 x)); set! + declare ~ define
 
@@ -383,7 +402,7 @@ Error: =: number required,
 
 ```
 ## If
-```
+```scheme
 (if #t               ; test expression
     "this is true"   ; then expression
     "this is false") ; else expression
@@ -396,7 +415,7 @@ Error: =: number required,
 ```
 
 ## Cond
-```
+```scheme
 ;(cond (<cond_1> <return_1>)
 ; 		(<cond_2> <return_2)>)
 ; 		(else <do>)); 
@@ -416,7 +435,7 @@ Error: =: number required,
 ```
 
 ## Case
-```
+```scheme
 (define test
   (lambda (x)
     (case x
@@ -433,7 +452,7 @@ Error: =: number required,
 (else 'not))))
 ```
 ## Loop
-```
+```scheme
 (define (lp i)
   (when (< i 10)
     (display i)
@@ -443,7 +462,7 @@ Error: =: number required,
 ```
 
 ## Iteration
-```
+```scheme
 (for-each display '(1 2 3 4 5))
 
 (do ((k 1 (+ k 1)))             ; init
@@ -497,7 +516,7 @@ def decimalToBinary(n):
 # Practice
 
 ## 1. Is the list of number?
-```
+```scheme
 (define is-list-number?
   (lambda (lst)
     (if (null? lst)
@@ -518,7 +537,7 @@ def decimalToBinary(n):
 
 ## 2. Temperature conversion: Farenheit <=> Celsius
 
-```
+```scheme
 (define FtoC
   (lambda(F)
     (/ (* 5 (- F 32)) 9)))
@@ -530,7 +549,7 @@ def decimalToBinary(n):
 
 ## 3. Make recognizers: alphabetic, numeric, whitespace
 
-```
+```scheme
  ; alphabetic: a-z or A-Z
 (define is-alphabetic?
   (lambda(x)
@@ -575,7 +594,7 @@ def decimalToBinary(n):
 
 ## 4. Check type
 
-```
+```scheme
 (define get-Type
   (lambda (x)
     (cond ((number? x) "Number")
@@ -585,7 +604,7 @@ def decimalToBinary(n):
 ```
 
 ## 4.Find the largest number in a list
-```
+```scheme
 (define list-max
   (lambda(lst)
     (cond ((null? (cdr lst)) (car lst))  ;cond((if lst is null) (return car))
@@ -597,7 +616,7 @@ def decimalToBinary(n):
 ```
 
 ## 5. Rotate the three element list:(a b c) -> (c, a, b) 
-```
+```scheme
 ; (car x)    ==(first x)
 ; (cadr x)   ==(second x) ==(car (cdr x))
 ; (caddr x)  ==(third x)  ==(car (cdr (cdr x)))
@@ -617,7 +636,7 @@ def decimalToBinary(n):
 ```
 
 ## 6. Remove the last element of list
-```
+```scheme
 (reverse '(9 0 6 8))
 ; => (8 6 0 9)
 
@@ -632,7 +651,7 @@ def decimalToBinary(n):
 
 ## 7. Make a list that consist of first and last element
 
- ```
+ ```scheme
 (define first_and_last
   (lambda (lst)
     (list (car lst) (car (reverse (cdr lst))))))
@@ -642,7 +661,7 @@ def decimalToBinary(n):
 ```
 
 ## 8. Write a number then compute its squre and root
-```
+```scheme
 (define sqare-and-root
   (lambda()
     (write "Enter your number:")
@@ -666,7 +685,7 @@ def decimalToBinary(n):
 
 
 ## 9.Quadratic equation solver
-```
+```scheme
 (define quadratic_solver
   (lambda(a b c)
     (define denominator (* 2 a))
@@ -684,6 +703,80 @@ def decimalToBinary(n):
 ; x1 = -1
 ; x2 = -3
 ```
-## 10. Home-made sqrt(x)
+
+## 10. Recursive and Non-revursive 
+```scheme
+; write a recursive 'sr' and on-recursive 'si' and commpute 1 + (1/2)^2 + (1/3)^2 + ...
+; recursive: s(n) = s(n-1) + 1/(n)^2
+; non-recursive: sum + 1/(i)^2
+
+
+(define sr
+  (lambda (n)
+    (if (= n 0)
+        0
+        (+ (/ 1 (* n n)) (sr (- n 1)))))) ;call itself
+
+
+(define si
+  (lambda (n)
+    (do ((i 1 (add1 i)) (sum 0))            ;initialization and update
+        ((> i n) display(sum))               ; termination test and expression
+        (set! sum (+ sum (/1 (* i i)))))))   ; loop body
+
+
+(sr 5)
+(si 5)
+```
+# 11. Count list number
+```scheme
+; count the number of times the elements e occurs in the list
+; (count 1 '(1 2 1 2 3 2 1))
+; 3
+
+
+; cond ((lst is null)  (return 0))
+;      ((e == car.lst) (expr1) (expr2))
+;      (else (expr1) (expr2))
+
+(define count
+  (lambda(e lst)
+    (cond ((null? lst) 0)          
+          ((equal? e (car lst)) (add1 (count e (cdr lst))))   
+          (else (count e (cdr lst))))))
+
+
+(define sum 0)
+(define count_2
+  (lambda(e lst) 
+    (cond ((null? lst) (display sum)))          
+          ((equal? e (car lst)) ((+ 1 sum) (count_2 e (cdr lst))))
+          (else (count_2 e (cdr lst)))))
+
+(count 1 '(1 1 1 2 3 2 0))
+(count_2 1 '(1 1 1 2 3 2 0))
+```
+
+## 12. Show star
+```scheme
+; cond ((cond1) (do))
+; 	 ((cond2) (do1) (do2))
+; 	 (else (do1) (do2))
+
+(define dot
+  (lambda (n)
+    (cond ((< n 1) (newline))
+        (else (display "*") (dot (- n 1))))))
+
+(define show_star
+  (lambda (lst)
+    (cond ((null? lst) (newline))
+          (else (dot (car lst)) (show_star (cdr lst))))))
+(show_star (list 3 4 5 6)
+; ***
+; ****
+; *****
+; ******
+```
 
 

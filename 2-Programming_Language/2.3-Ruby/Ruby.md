@@ -43,6 +43,7 @@
   - [find largest number](#find-largest-number)
   - [tail recursion](#tail-recursion)
   - [Class Set(show, found, hasMember, isSet?)](#class-setshow-found-hasmember-isset)
+  - [Recursive and non-recursive](#recursive-and-non-recursive)
 
 <!-- /TOC -->
 
@@ -169,7 +170,9 @@ puts a.include?(4)
 puts a.at(-1)
 puts a.delete(4)
 print a
-a.each{|i| print i," - "}
+
+a.each{|i| print i," - "} # content
+a.length.times do |i|     # list number
 
 # true
 # # 6
@@ -210,6 +213,7 @@ exclusive = 1...10
 ```
 
 ## Set
+Set implements a collection of unordered values with no duplicates. 
 ```ruby
 require 'set'
 s1 = Set.new [1, 2]              # -> #<Set: {1, 2}>
@@ -469,7 +473,7 @@ end
 ```
 
 ### collect
-return value into a array
+return value into a array, same as map
 
 ```ruby
 cubs = [1, 2, 3].collect { |x| x**3 }
@@ -598,7 +602,7 @@ public
 ```
 
 # Exercise
-## palindrome
+## 1. palindrome
 ```ruby
 a = ["radar", "madam", "Madam","amanaplanacanalpanama","9876543210123456789"]
 
@@ -610,7 +614,7 @@ for w in a do
   puts "Is {#w} palindrome: #{pal(w)}"
 end
 ```
-## find largest number
+## 2. find largest number
 ```ruby
 def max(first, *rest)
   max=first
@@ -623,7 +627,7 @@ def max(first, *rest)
 end
 ```
 
-## tail recursion
+## 3. tail recursion
 ```ruby
 def tail(a)
   a[1..a.length-1]
@@ -640,7 +644,7 @@ end
 a = [1,2,3,4,6]
 p a, tail(a), sum(a)
 ```
-## Class Set(show, found, hasMember, isSet?)
+## 4. Class Set(show, found, hasMember, isSet?)
 ```ruby
 class Set
   def initialize(*a)
@@ -679,4 +683,92 @@ puts s.show()        # {1,2,3}
 puts s.found(5)      # false
 puts s.hasMember(5)  # NO!
 puts s.isSet?        # true
+```
+## 5. Recursive and non-recursive
+```ruby
+# write a recursive 'sr' and on-recursive 'si' and commpute 1 + (1/2)^2 + (1/3)^2 + ...
+# recursive: s(n) = s(n-1) + 1/(n)^2
+# non-recursive: sum + 1/(i)^2
+
+def sr(n)
+  if n == 0
+    return 0
+  end
+  Math.sqrt(1.0/n) + sr(n - 1)
+end
+
+
+def si(n)
+  sum = 0
+  i = 1
+  while i <= n
+    sum = sum + Math.sqrt(1.0/i)
+    i = i + 1
+  end
+  return sum
+end
+```
+
+## 6. Extend Array and return sequence 1-7 
+
+``` ruby
+  def saw(m)
+    self.length.times do |i|  # list number
+      self[i] = 1 + i % m
+    end
+    self
+  end
+
+  def show
+    self.each do |i|
+      print self[i], " "
+    end
+  end
+end
+
+a = Array.new(30)
+p a.saw(7)
+a.show
+# [1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7, 1, 2]
+# 2 3 4 5 6 7 1 2 3 4 5 6 7 1 2 3 4 5 6 7 1 2 3 4 5 6 7 1 2 3 
+```
+## 7. Sphere class
+
+```ruby
+# Create the class Ball that inherits properties from the class Sphere and adds a new instance variable color
+class Ball < Sphere
+  def initialize(radius, color)
+    super(radius)
+    @color = color
+  end
+  def show
+     "Ball: #{@r}, #{@color}"
+  end
+end
+
+# Then create the class MyBall that inherits properties from the class Ball and adds a new instance variable owner.
+class MyBall < Ball
+  def initialize(radius, color, owner)
+    super(radius,color)
+    @owner = owner
+  end
+
+  def show
+    super + " it belongs to: " + @owner
+  end
+end
+
+p
+b = Sphere.new(1)
+puts b.area
+puts b.volume
+# 12.566370614359172
+# 4.1887902047863905
+#
+oneball = Ball.new(2,'red')
+puts oneball.show
+
+myball = MyBall.new(1, "blue", "peter")
+puts myball.show
+# Ball: 1, blue it belongs to: peter
 ```

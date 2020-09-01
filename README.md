@@ -1,27 +1,9 @@
 
 
 
-## :pencil2: Algorithm
+## :pencil2: Algorithm and Data Structure
 
-- [Leetcode/Lintcode](http://localhost:8888/lab/tree/notes/summary.ipynb)
-
-## :triangular_ruler: Data Structure
-- Leetcode/Lintcode
-
-
-## :computer: Operation System
-
-
-
-## :cloud: Network
-
-
-## :art: ??
-
-
-## :floppy_disk: Data Base
-
-
+- [Leetcode/Lintcode](#)
 
 ## :coffee: Programing Language
 
@@ -30,18 +12,34 @@
 - C++
 - python
 
+<!-- ## :triangular_ruler: Data Structure
+- Leetcode/Lintcode -->
 
-## :bulb: System Design
+
+<!-- ## :computer: Operation System -->
 
 
-## :wrench: Tools
+<!-- ## :cloud: Network -->
+
+
+<!-- ## :art: ?? -->
+
+
+## :floppy_disk: Data Base
+- MySQL
+
+<!-- ## :bulb: System Design -->
+
+
+<!-- ## :wrench: Tools -->
 
 
 ## :watermelon: Projects
+www.fanxinwei.com
 
 
-## :memo: Memo
-thanks for [CyC2018](https://github.com/CyC2018/CS-Notes)
+<!-- ## :memo: Memo -->
+<!-- thanks for [CyC2018](https://github.com/CyC2018/CS-Notes) -->
 
 
 
